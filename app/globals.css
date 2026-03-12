@@ -1,26 +1,53 @@
+/* 1. TOUS LES IMPORTS EN PREMIER */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* 2. LA CONFIGURATION DU THÈME */
+@theme {
+  /* --- Couleurs --- */
+  --color-dark: #1B1B1E;
+  --color-primary: #96031A;
+  --color-accent: #FAA916;
+  --color-light: #FBFFFE;
+  --color-beige: #FDF8E6;
+
+  /* --- Typographies --- */
+  --font-sans: Montserrat, ui-sans-serif, system-ui, sans-serif;
+  --font-serif: Playfair Display, ui-serif, Georgia, serif;
+  --font-signature: Great Vibes, cursive;
+
+  
+  /* --- Design Tokens --- */
+  --radius-button: 0.5rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* 3. LES RÈGLES DE BASE */
+@layer base {
+  body {
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 18px;
+    line-height: 1.6;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  h1, h2, h3, h4 {
+    color: var(--color-primary);
+    font-family: var(--font-serif);
+    font-weight: 700;
+    line-height: 1.2;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* 4. LES COMPOSANTS PERSONNALISÉS */
+@layer components {
+  .btn-main {
+    @apply bg-primary text-light px-6 py-2 rounded-button transition-all hover:brightness-110 active:scale-95 inline-block;
+  }
+  .btn-secondary {
+    @apply border-2 border-primary text-primary px-6 py-2 rounded-button hover:bg-primary hover:text-light transition-all;
+  }
+
 }
