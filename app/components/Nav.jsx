@@ -45,7 +45,7 @@ export default function Nav() {
 
             {/* header */}
             <header
-                className={`fixed lg:absolute top-0 left-0 w-full h-full lg:h-auto bg-light z-40
+                className={`fixed lg:absolute top-0 left-0 w-full h-full lg:h-auto bg-beige lg:bg-light z-40
                 flex items-center justify-center
                 transition-all duration-500 ease-in-out
                 

@@ -1,10 +1,11 @@
 import Hero from "./components/Hero";
-import Nav from "./components/Nav";
+import WhoAmI from "./components/WhoAmI";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       <Hero />
+      <WhoAmI/>
     </main>
   );
 }
