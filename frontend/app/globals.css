@@ -44,10 +44,10 @@
 /* 4. LES COMPOSANTS PERSONNALISÉS */
 @layer components {
   .btn-main {
-    @apply bg-primary text-light px-6 py-2 rounded-button transition-all hover:brightness-110 active:scale-95 inline-block;
+    @apply bg-primary text-beige text-[1rem] lg:text-[1.125rem] px-12 py-4 rounded-3xl transition-all hover:brightness-110 active:scale-95 inline-block;
   }
   .btn-secondary {
-    @apply border-2 border-primary text-primary px-6 py-2 rounded-button hover:bg-primary hover:text-light transition-all;
+    @apply border-2 border-primary text-primary text-[1rem] lg:text-[1.125rem] px-12 py-4 rounded-3xl transition-all hover:bg-primary hover:text-beige transition-all;
   }
 
 }

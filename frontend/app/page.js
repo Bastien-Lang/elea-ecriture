@@ -1,3 +1,4 @@
+import Books from "./components/Books";
 import Hero from "./components/Hero";
 import WhoAmI from "./components/WhoAmI";
 import Workshop from "./components/Workshop";
@@ -8,6 +9,7 @@ export default function Home() {
       <Hero />
       <WhoAmI/>
       <Workshop/>
+      <Books/>
     </main>
   );
 }
