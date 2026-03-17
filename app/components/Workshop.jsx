@@ -1,28 +1,15 @@
+import Title from "./Title";
+import Vector from "./Vector";
+
 export default function Workshop() {
-    return(
-        <section className="relative min-h-screen bg-beige flex items-center justify-center py-12">
-            <div className="max-w-[1280px] w-full flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-20 px-6 text-dark">
-                <div className="relative w-full max-w-[350px] lg:max-w-[450px] rounded-[32px] lg:rounded-[64px] overflow-hidden scale-x-[-1] shadow-sm">
-                    <img 
-                        src="/images/meditation.jpg" 
-                        alt="Emanuelle Lang"
-                        className="w-full h-full object-cover" 
-                    />
-                    <h6>Méditation guidée</h6>
-                </div>
-                <div className="relative w-full max-w-[350px] lg:max-w-[450px] rounded-[32px] lg:rounded-[64px] overflow-hidden scale-x-[-1] shadow-sm">
-                    <img 
-                        src="/images/atelier.jpg" 
-                        alt="Emanuelle Lang"
-                        className="w-full h-full object-cover" 
-                    />
-                    <h6>Atelier d'écriture</h6>
-                </div>
+    return (
+        <section className="relative min-h-screen bg-white flex items-center justify-center py-20 px-6">
+            <div className="max-w-[1280px] lg:py-40 w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-16 lg:gap-24">
+                <Vector position="top" />
+                <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start order-2 lg:order-1">
+                    <Title>Mes ateliers</Title>
 
-                <div className="w-full lg:max-w-[500px] flex flex-col items-center lg:items-start text-center lg:text-left">
-                    <Title>Qui suis-je ?</Title>
-
-                    <div className="mt-6 space-y-2 text-[1rem] leading-relaxed text-justify lg:text-left">
+                    <div className="space-y-2 mt-6 text-dark text-[1rem] lg:text-[1.125rem] text-justify leading-relaxed max-w-lg">
                         <p>
                             Après des études universitaires littéraires, je me suis orientée dans l’accompagnement des personnes sur les chemins de la conscience et du développement personnel.
                         </p>
@@ -38,7 +25,34 @@ export default function Workshop() {
                     </div>
                 </div>
 
+                <div className="w-full lg:w-1/2 flex flex-col lg:flex-row items-center justify-between lg:justify-end gap-4 md:gap-8 order-1 lg:order-2">
+                    
+                    <div className="flex flex-col items-center gap-4 w-full max-w-[180px] md:max-w-[240px]">
+                        <div className="w-full aspect-[3/4] rounded-[24px] overflow-hidden shadow-sm">
+                            <img 
+                                src="/images/atelier.jpg" 
+                                alt="Atelier d'écriture"
+                                className="w-full h-full object-cover" 
+                            />
+                        </div>
+                        <p className="text-dark font-medium text-center text-sm md:text-base">Ateliers d'écriture</p>
+                    </div>
+
+                    <div className="flex flex-col items-center gap-4 w-full max-w-[180px] md:max-w-[240px]">
+                        <div className="w-full aspect-[3/4] rounded-[24px] overflow-hidden shadow-sm">
+                            <img 
+                                src="/images/meditation.jpg" 
+                                alt="Ateliers de méditation"
+                                className="w-full h-full object-cover" 
+                            />
+                        </div>
+                        <p className="text-dark font-medium text-center text-sm md:text-base">Ateliers de méditation</p>
+                    </div>
+
+                </div>
+
             </div>
+            <Vector />
         </section>
-    )
+    );
 }
