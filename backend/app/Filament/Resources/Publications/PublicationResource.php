@@ -43,6 +43,7 @@ class PublicationResource extends Resource
                             ->label('Couverture du livre')
                             ->image()
                             ->directory('publications')
+                            ->disk('public')
                             ->required(),
                         DatePicker::make('published_at')
                             ->label('Date de parution')

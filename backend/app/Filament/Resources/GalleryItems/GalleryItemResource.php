@@ -6,9 +6,6 @@ use App\Filament\Resources\GalleryItems\Pages\CreateGalleryItem;
 use App\Filament\Resources\GalleryItems\Pages\EditGalleryItem;
 use App\Filament\Resources\GalleryItems\Pages\ListGalleryItems;
 use App\Filament\Resources\GalleryItems\Pages\ViewGalleryItem;
-use App\Filament\Resources\GalleryItems\Schemas\GalleryItemForm;
-use App\Filament\Resources\GalleryItems\Schemas\GalleryItemInfolist;
-use App\Filament\Resources\GalleryItems\Tables\GalleryItemsTable;
 use App\Models\GalleryItem;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -23,9 +20,9 @@ class GalleryItemResource extends Resource
 {
     protected static ?string $model = GalleryItem::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-photo';
 
-    protected static ?string $recordTitleAttribute = 'GalleryItem';
+    protected static ?string $recordTitleAttribute = 'title';
 
     public static function form(Schema $schema): Schema
     {
@@ -33,7 +30,7 @@ class GalleryItemResource extends Resource
             Select::make('theme_id')
                 ->relationship('theme', 'name')
                 ->required()
-                ->createOptionForm([ // Permet de créer un thème sans quitter la page !
+                ->createOptionForm([
                     TextInput::make('name')->required(),
                     TextInput::make('slug')->required(),
                 ]),
@@ -43,26 +40,41 @@ class GalleryItemResource extends Resource
             TextInput::make('title')->label('Titre (optionnel)'),
             FileUpload::make('image_path')
                 ->image()
-                ->directory('gallery') // Les images iront dans storage/app/public/gallery
-                ->required(),
+                ->directory('gallery')
+                ->required()
+                ->optimize('webp')
+                ->disk('public'),
         ]);
-    }
-
-    public static function infolist(Schema $schema): Schema
-    {
-        return GalleryItemInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return GalleryItemsTable::configure($table);
-    }
+        return $table
+            ->columns([
+                \Filament\Tables\Columns\ImageColumn::make('image_path')
+                    ->label('Image')
+                    ->disk('public'),
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
+                \Filament\Tables\Columns\TextColumn::make('title')
+                    ->label('Titre')
+                    ->searchable(),
+
+                \Filament\Tables\Columns\TextColumn::make('theme.name')
+                    ->label('Thème'),
+
+                \Filament\Tables\Columns\TextColumn::make('type')
+                    ->label('Type')
+                    ->badge(),
+            ])
+            ->filters([
+                //
+            ])
+            ->actions([
+               //rajouter les actions pour quick edit et quick delete
+            ])
+            ->bulkActions([
+            //rajouter les actions pour quick edit et quick delete
+            ]);
     }
 
     public static function getPages(): array
@@ -70,7 +82,6 @@ class GalleryItemResource extends Resource
         return [
             'index' => ListGalleryItems::route('/'),
             'create' => CreateGalleryItem::route('/create'),
-            'view' => ViewGalleryItem::route('/{record}'),
             'edit' => EditGalleryItem::route('/{record}/edit'),
         ];
     }
