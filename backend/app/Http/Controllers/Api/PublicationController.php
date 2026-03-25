@@ -23,4 +23,23 @@ class PublicationController extends Controller
             'image_url' => asset('storage/' . $publication->image_path), 
         ]);
     }
+
+    public function all() : JsonResponse
+    {
+
+        $publications = Publication::orderBy('published_at', 'desc')->get();
+
+        if ($publications->isEmpty()) {
+            return response()->json([], 200); 
+        }
+
+        $publications->transform(function ($item) {
+            $item->image_url = $item->image_path 
+                ? asset('storage/' . $item->image_path) 
+                : null;
+            return $item;
+        });
+
+         return response()->json($publications);
+    }
 }

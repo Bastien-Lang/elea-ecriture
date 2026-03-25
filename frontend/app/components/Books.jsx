@@ -28,7 +28,7 @@ export default function Books() {
     }, []);
 
     return (
-        <section className="relative min-h-[85vh] bg-beige flex items-center justify-center py-20 px-6">
+        <section id="publications" className="relative min-h-[85vh] bg-beige flex items-center justify-center py-20 px-6">
             <div className="max-w-[1280px] w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-16 lg:gap-24 text-dark">
                 
                 {/* Colonne GAUCHE : La Card */}
@@ -56,7 +56,7 @@ export default function Books() {
 
                 {/* Colonne DROITE : Texte de présentation */}
                 <div className="w-full lg:max-w-[500px] flex flex-col items-center lg:items-start text-center lg:text-left">
-                    <Title>Mes parutions</Title>
+                    <Title>Parutions</Title>
 
                     <div className="my-6 space-y-4 text-[1rem] lg:text-[1.125rem] leading-relaxed text-justify lg:text-left">
                         <p>

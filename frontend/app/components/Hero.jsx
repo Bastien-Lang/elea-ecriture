@@ -2,7 +2,7 @@ import Vector from "./Vector";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+    <section id="accueil" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
         {/* 1. L'image de fond (Background) */}
         <div 
             className="absolute inset-0 bg-[url('/images/hero-bg.jpg')] bg-cover bg-center"

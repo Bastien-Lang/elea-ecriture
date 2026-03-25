@@ -7,7 +7,7 @@ export default function Workshop() {
             <div className="max-w-[1280px] lg:py-40 w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-16 lg:gap-24">
                 <Vector position="top" />
                 <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start order-2 lg:order-1">
-                    <Title>Mes ateliers</Title>
+                    <Title>Ateliers</Title>
 
                     <div className="space-y-2 mt-6 text-dark text-[1rem] lg:text-[1.125rem] text-justify leading-relaxed max-w-lg">
                         <p>

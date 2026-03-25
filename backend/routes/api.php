@@ -6,6 +6,8 @@ use App\Models\Theme;
 
 Route::get('/publications/latest', [PublicationController::class, 'latest']);
 
+Route::get('publications', [PublicationController::class, 'all']);
+
 Route::get('/gallery', function () {
     return Theme::with('items')->get();
 });

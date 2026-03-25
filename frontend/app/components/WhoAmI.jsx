@@ -2,7 +2,7 @@ import Title from "./Title";
 
 export default function WhoAmI() {
     return (
-        <section className="relative min-h-[85vh] bg-beige flex items-center justify-center py-20 px-6">
+        <section id="bio" className="relative min-h-[85vh] bg-beige flex items-center justify-center py-20 px-6">
             <div className="max-w-[1280px] w-full flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24 text-dark">
                 <div className="relative w-full max-w-[350px] lg:max-w-[450px] aspect-square rounded-[32px] lg:rounded-[64px] overflow-hidden scale-x-[-1] shadow-sm">
                     <img 

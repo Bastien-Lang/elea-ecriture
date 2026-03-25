@@ -1,73 +1,69 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Nav() {
-    const liStyle = "text-dark hover:text-primary transition-colors";
     const [isOpen, setIsOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
 
-    const toggleMenu = () => {
-        setIsOpen(prev => !prev);
-    };
+    // Style des liens avec un petit soulignement élégant au survol
+    const liStyle = "text-dark hover:text-primary transition-all duration-300 relative group py-2";
+
+    // Détecter le scroll pour changer l'apparence de la nav
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 50);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    const toggleMenu = () => setIsOpen(prev => !prev);
+    const closeMenu = () => setIsOpen(false);
 
     return (
         <>
-            {/* bouton burger (mobile uniquement) */}
+            {/* Bouton burger - Amélioré avec condition de couleur selon le scroll */}
             <button
                 onClick={toggleMenu}
-                className="fixed top-6 right-6 z-50 group lg:hidden"
+                className="fixed top-6 right-6 z-[60] lg:hidden bg-dark p-3 rounded-full shadow-lg"
             >
-                <div className="relative flex items-center justify-center rounded-full w-[50px] h-[50px]
-                transition-all hover:scale-110 active:scale-95 hover:ring-8 duration-200">
-
-                    <div className="flex flex-col justify-between w-[20px] h-[20px] relative">
-
-                        <span className={`bg-light h-[3px] w-7 transition-all duration-300 rounded-full
-                        ${isOpen ? "translate-x-10 opacity-0" : ""}`} />
-
-                        <span className={`bg-light h-[3px] w-7 transition-all duration-300 delay-75 rounded-full
-                        ${isOpen ? "translate-x-10 opacity-0" : ""}`} />
-
-                        <span className={`bg-light h-[3px] w-7 transition-all duration-300 delay-150 rounded-full
-                        ${isOpen ? "translate-x-10 opacity-0" : ""}`} />
-
-                        <div className={`absolute flex items-center justify-center w-full h-full
-                        transition-all duration-500
-                        ${isOpen ? "opacity-100 rotate-0" : "opacity-0 rotate-90"}`}>
-
-                            <span className="absolute bg-dark h-[3px] w-5 rotate-45 rounded-full" />
-                            <span className="absolute bg-dark h-[3px] w-5 -rotate-45 rounded-full" />
-
-                        </div>
-                    </div>
+                <div className="relative flex flex-col justify-between w-6 h-4">
+                    <span className={`bg-beige h-[2px] w-full transition-all duration-300 ${isOpen ? "rotate-45 translate-y-2" : ""}`} />
+                    <span className={`bg-beige h-[2px] w-full transition-all duration-300 ${isOpen ? "opacity-0" : ""}`} />
+                    <span className={`bg-beige h-[2px] w-full transition-all duration-300 ${isOpen ? "-rotate-45 -translate-y-2" : ""}`} />
                 </div>
             </button>
 
-            {/* header */}
+            {/* Header Sticky */}
             <header
-                className={`fixed lg:absolute top-0 left-0 w-full h-full lg:h-auto bg-beige lg:bg-light z-40
-                flex items-center justify-center
-                transition-all duration-500 ease-in-out
-                
-                ${isOpen
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 -translate-y-10 pointer-events-none"}
-                
-                lg:opacity-100 lg:translate-y-0 lg:pointer-events-auto`}
+                className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 
+                ${scrolled ? "bg-beige/80 backdrop-blur-md py-2 shadow-sm" : "bg-transparent py-6"}
+                ${isOpen ? "h-screen bg-beige opacity-100" : "h-auto"} 
+                lg:h-auto lg:opacity-100`}
             >
-                <nav className="py-6 px-6 flex flex-col lg:flex-row lg:min-h-[80px] justify-between items-center w-full min-h-[50vh] max-w-[1400px]">
+                <nav className="max-w-[1400px] mx-auto px-6 flex flex-col lg:flex-row justify-between items-center w-full h-full">
+                    
+                    {/* Logo */}
+                    <div className="flex items-center justify-between w-full lg:w-auto">
+                        <a href="#accueil" onClick={closeMenu}>
+                            <img src="/logo.svg" alt="Logo" className={`transition-all duration-300 ${scrolled ? "max-w-[60px]" : "max-w-[80px]"}`} />
+                        </a>
+                    </div>
 
-                    <img src="/logo.svg" alt="Logo" className="max-w-[80px]" />
-
-                    <ul className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10 font-sans text-dark">
-                        <li className={liStyle}><a href="#">Accueil</a></li>
-                        <li className={liStyle}><a href="#">Qui suis-je</a></li>
-                        <li className={liStyle}><a href="#">Ateliers</a></li>
-                        <li className={liStyle}><a href="#">Parutions</a></li>
-                        <li className={liStyle}><a href="#">Actualités</a></li>
-                        <li className={liStyle}><a href="#">Contact</a></li>
+                    {/* Menu Links */}
+                    <ul className={`
+                        flex flex-col lg:flex-row items-center gap-8 lg:gap-10 font-sans text-dark uppercase tracking-widest text-sm
+                        transition-all duration-500
+                        ${isOpen ? "mt-20 opacity-100" : "hidden lg:flex opacity-100"}
+                    `}>
+                        <li className={liStyle}><a href="#accueil" onClick={closeMenu}>Accueil</a></li>
+                        <li className={liStyle}><a href="#bio" onClick={closeMenu}>Qui suis-je</a></li>
+                        <li className={liStyle}><a href="#publications" onClick={closeMenu}>Parutions</a></li>
+                        <li className={liStyle}><a href="#galerie" onClick={closeMenu}>Galerie</a></li>
+                        <li className={liStyle}><a href="#contact" onClick={closeMenu}>Contact</a></li>
+                        
+                        {/* Barre de soulignement animée en desktop */}
+                        <span className="hidden lg:block absolute bottom-0 left-0 w-0 h-[1px] bg-dark transition-all duration-300 group-hover:w-full"></span>
                     </ul>
-
                 </nav>
             </header>
         </>
