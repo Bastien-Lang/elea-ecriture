@@ -15,7 +15,7 @@ export default function WhoAmI() {
                 <div className="w-full lg:max-w-[500px] flex flex-col items-center lg:items-start text-center lg:text-left">
                     <Title>Qui suis-je ?</Title>
 
-                    <div className="mt-6 space-y-2 text-[1rem] lg:text-[1.125rem] leading-relaxed text-justify lg:text-left">
+                    <div className="mt-6 space-y-2 text-[1rem] lg:text-[1.125rem] leading-relaxed text-left lg:text-left">
                         <p>
                             Après des études universitaires littéraires, je me suis orientée dans l’accompagnement des personnes sur les chemins de la conscience et du développement personnel.
                         </p>

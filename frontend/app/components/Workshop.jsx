@@ -9,7 +9,7 @@ export default function Workshop() {
                 <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start order-2 lg:order-1">
                     <Title>Ateliers</Title>
 
-                    <div className="space-y-2 mt-6 text-dark text-[1rem] lg:text-[1.125rem] text-justify leading-relaxed max-w-lg">
+                    <div className="space-y-2 mt-6 text-dark text-[1rem] lg:text-[1.125rem] text-left leading-relaxed max-w-lg">
                         <p>
                             Après des études universitaires littéraires, je me suis orientée dans l’accompagnement des personnes sur les chemins de la conscience et du développement personnel.
                         </p>

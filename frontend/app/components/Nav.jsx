@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function Nav() {
     const [isOpen, setIsOpen] = useState(false);
@@ -60,6 +61,7 @@ export default function Nav() {
                         <li className={liStyle}><a href="#publications" onClick={closeMenu}>Parutions</a></li>
                         <li className={liStyle}><a href="#galerie" onClick={closeMenu}>Galerie</a></li>
                         <li className={liStyle}><a href="#contact" onClick={closeMenu}>Contact</a></li>
+                        <li className={liStyle}><Link href="/parutions" onClick={closeMenu}>Parutions</Link></li>
                         
                         {/* Barre de soulignement animée en desktop */}
                         <span className="hidden lg:block absolute bottom-0 left-0 w-0 h-[1px] bg-dark transition-all duration-300 group-hover:w-full"></span>
