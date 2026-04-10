@@ -4,20 +4,15 @@ import { useState, useEffect } from "react";
 import Title from "./Title";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
-// Optionnel : Ajoute le plugin Captions pour voir le titre DANS la lightbox aussi
 import Captions from "yet-another-react-lightbox/plugins/captions";
 import "yet-another-react-lightbox/plugins/captions.css";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Gallery() {
     const [themes, setThemes] = useState([]);
     const [activeTheme, setActiveTheme] = useState(null);
     const [loading, setLoading] = useState(true);
-    
-    // Pagination
-    const IMAGES_PER_PAGE = 6;
-    const [visibleCount, setVisibleCount] = useState(IMAGES_PER_PAGE);
-
-    // États pour la Lightbox
+    const [visibleCount, setVisibleCount] = useState(6);
     const [index, setIndex] = useState(-1);
 
     useEffect(() => {
@@ -31,104 +26,97 @@ export default function Gallery() {
             .catch((err) => console.error("Erreur Galerie:", err));
     }, []);
 
-    // Reset de la pagination quand on change de thème
     const handleThemeChange = (theme) => {
         setActiveTheme(theme);
-        setVisibleCount(IMAGES_PER_PAGE);
-        setIndex(-1);
+        setVisibleCount(6);
     };
 
-    // Images actuellement visibles
     const visibleItems = activeTheme?.items?.slice(0, visibleCount) || [];
-
-    // Préparation des slides pour la lightbox (toutes les images du thème, pas seulement les visibles)
     const slides = activeTheme?.items.map((item) => ({
         src: item.image_url,
         title: item.title,
-        description: item.type, // Petit bonus : affiche le type (peinture/photo)
+        description: item.type,
     })) || [];
 
-    if (loading) return <div className="py-20 text-center">Chargement...</div>;
+    if (loading) return <div className="py-20 text-center italic opacity-50">Chargement de la galerie...</div>;
 
     return (
-        <section className="py-20 bg-beige px-6" id="galerie">
+        <section className="py-20 bg-beige px-6 overflow-hidden" id="galerie">
             <div className="max-w-[1280px] mx-auto">
-                <div className="text-center mb-6">
+                <motion.div 
+                    className="text-center mb-12"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                >
                     <Title>Galerie & Créations</Title>
-                </div>
+                </motion.div>
 
-                {/* Filtres */}
-                <div className="flex flex-wrap justify-center gap-4 mb-12">
+                {/* Filtres : Stagger sur les boutons */}
+                <motion.div 
+                    className="flex flex-wrap justify-center gap-4 mb-12"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ staggerChildren: 0.1, delayChildren: 0.2 }}
+                    viewport={{ once: true }}
+                >
                     {themes.map((theme) => (
-                        <button
+                        <motion.button
                             key={theme.id}
+                            variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
                             onClick={() => handleThemeChange(theme)}
-                            className={`capitalize py-2 ${
-                                activeTheme?.id === theme.id 
-                                ? "btn-main" 
-                                : "btn-secondary"
+                            className={`capitalize px-6 py-2 rounded-full transition-all duration-300 text-sm tracking-widest ${
+                                activeTheme?.id === theme.id ? "bg-primary text-beige shadow-md" : "bg-white/50 text-dark hover:bg-white"
                             }`}
                         >
                             {theme.name}
-                        </button>
+                        </motion.button>
                     ))}
-                </div>
+                </motion.div>
 
-                {/* Grille d'images */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {visibleItems.map((item, idx) => (
-                        <div 
-                            key={item.id} 
-                            onClick={() => setIndex(idx)}
-                            className="group relative aspect-[4/5] overflow-hidden rounded-[20px] shadow-md bg-white cursor-zoom-in"
-                        >
-                            <img
-                                src={item.image_url}
-                                alt={item.title || "Image de galerie"}
-                                loading="lazy"
-                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                            />
-                            
-                            {/* Overlay avec Titre + Action */}
-                            <div className="absolute inset-0 bg-dark/60 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center p-6 text-center">
-                                <h3 className="text-beige text-xl font-serif italic mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform">
-                                    {item.title || "Sans titre"}
-                                </h3>
-                                <div className="w-10 h-[1px] bg-beige/50 mb-4"></div>
-                                <span className="text-beige/80 text-xs uppercase tracking-widest font-light">
-                                    Agrandir
-                                </span>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                {/* Grille : On utilise AnimatePresence pour le changement de thème */}
+                <motion.div 
+                    layout
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+                >
+                    <AnimatePresence mode="popLayout">
+                        {visibleItems.map((item, idx) => (
+                            <motion.div 
+                                key={item.id}
+                                layout
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.9 }}
+                                transition={{ duration: 0.4 }}
+                                onClick={() => setIndex(idx)}
+                                className="group relative aspect-[4/5] overflow-hidden rounded-[30px] shadow-sm bg-white cursor-zoom-in"
+                            >
+                                <img
+                                    src={item.image_url}
+                                    alt={item.title}
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                />
+                                <div className="absolute inset-0 bg-dark/40 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center p-6 text-center">
+                                    <p className="text-beige font-serif italic text-xl">{item.title || "Sans titre"}</p>
+                                    <span className="text-beige/70 text-[10px] uppercase tracking-[0.2em] mt-2">Agrandir</span>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </AnimatePresence>
+                </motion.div>
 
-                {/* Bouton Charger Plus */}
                 {activeTheme?.items.length > visibleCount && (
-                    <div className="mt-16 text-center">
+                    <motion.div className="mt-16 text-center" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
                         <button 
-                            onClick={() => setVisibleCount(prev => prev + IMAGES_PER_PAGE)}
-                            className="btn-secondary py-2 text-sm transition-colors tracking-widest uppercase"
+                            onClick={() => setVisibleCount(prev => prev + 6)}
+                            className="text-primary border-b border-primary/30 pb-1 hover:border-primary transition-all uppercase text-xs tracking-widest font-bold"
                         >
                             Voir plus de créations
                         </button>
-                    </div>
+                    </motion.div>
                 )}
 
-                {/* La Lightbox avec plugin Captions */}
-                <Lightbox
-                    index={index}
-                    open={index >= 0}
-                    close={() => setIndex(-1)}
-                    slides={slides}
-                    plugins={[Captions]}
-                />
-
-                {activeTheme?.items.length === 0 && (
-                    <p className="text-center italic text-gray-500 mt-10">
-                        Ce thème ne contient pas encore d'images.
-                    </p>
-                )}
+                <Lightbox index={index} open={index >= 0} close={() => setIndex(-1)} slides={slides} plugins={[Captions]} />
             </div>
         </section>
     );

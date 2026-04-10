@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Title from "./Title";
+import { motion } from "framer-motion"; // Import ajouté
 
 export default function Contact() {
     const [formData, setFormData] = useState({
@@ -34,18 +35,31 @@ export default function Contact() {
         }
     };
 
-    const inputClass = "w-full px-6 py-4 rounded-xl bg-light/90 text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-gray-450";
-    const labelClass = "block text-light text-xl font-sans mb-2 ml-2";
+    const inputClass = "w-full px-6 py-4 text-[1rem] lg:text-[1.125rem] rounded-xl bg-light/90 text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-gray-450";
+    const labelClass = "block text-light text-md text-[1rem] lg:text-[1.125rem] font-sans mb-2 ml-0 ";
 
     return (
-        <section className="py-24 bg-beige px-6" id="contact">
+        <section className="py-24 bg-beige overflow-hidden" id="contact">
             <div className="max-w-[1000px] mx-auto">
-                <div className="text-center mb-12">
+                {/* Animation sur le titre */}
+                <motion.div 
+                    className="text-center mb-12"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                >
                     <Title>Contactez-moi</Title>
-                </div>
+                </motion.div>
 
-                {/* Le bloc bordeaux */}
-                <div className="bg-primary/90 rounded-[50px] p-8 md:p-16 shadow-2xl">
+                {/* Animation sur le bloc bordeaux */}
+                <motion.div 
+                    className="bg-primary/90 rounded-[50px] p-6 md:p-16 shadow-2xl"
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                >
                     <form onSubmit={handleSubmit} className="space-y-8">
                         
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -101,11 +115,11 @@ export default function Contact() {
                         </div>
 
                         {/* Bouton Envoi */}
-                        <div className="text-center pt-4">
+                        <div className="text-center">
                             <button 
                                 type="submit"
                                 disabled={status === "loading"}
-                                className="text-primary bg-light hover:border hover:border-solid hover:bg-primary hover:text-light hover:border-light px-12 py-4 rounded-full font-bold uppercase tracking-widest transition-all disabled:opacity-50"
+                                className="btn-main text-primary bg-light hover:border hover:border-solid hover:bg-primary hover:text-light hover:border-light px-6 py-4 rounded-full font-bold uppercase tracking-widest transition-all disabled:opacity-50"
                             >
                                 {status === "loading" ? "Envoi en cours..." : "Envoyer le message"}
                             </button>
@@ -118,7 +132,7 @@ export default function Contact() {
                             )}
                         </div>
                     </form>
-                </div>
+                </motion.div>
             </div>
         </section>
     );

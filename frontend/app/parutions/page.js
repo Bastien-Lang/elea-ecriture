@@ -36,8 +36,8 @@ export default function PublicationsPage() {
         <main className="min-h-screen bg-beige pt-32 pb-20 px-6">
             <div className="max-w-[1100px] mx-auto">
                 
-                <Link href="/" className="text-dark/50 hover:text-dark transition-colors text-sm uppercase tracking-widest mb-10 inline-block">
-                    ← Retour à l'accueil
+                <Link href="/#news" className="text-dark/50 hover:text-dark transition-colors text-sm uppercase tracking-widest mb-10 inline-block">
+                    ← Retour aux actualités
                 </Link>
 
                 <div className="mb-16">

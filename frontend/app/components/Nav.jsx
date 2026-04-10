@@ -2,17 +2,16 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Nav() {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
-    // Style des liens avec un petit soulignement élégant au survol
-    const liStyle = "text-dark hover:text-primary transition-all duration-300 relative group py-2";
+    const liStyle = "text-dark hover:text-primary transition-colors relative group py-2 text-[13px] uppercase tracking-[0.15em] font-medium";
 
-    // Détecter le scroll pour changer l'apparence de la nav
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 50);
+        const handleScroll = () => setScrolled(window.scrollY > 20);
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
@@ -20,54 +19,105 @@ export default function Nav() {
     const toggleMenu = () => setIsOpen(prev => !prev);
     const closeMenu = () => setIsOpen(false);
 
+    const menuVariants = {
+        closed: { opacity: 0, y: -10 },
+        open: { 
+            opacity: 1, 
+            y: 0,
+            transition: { staggerChildren: 0.08, delayChildren: 0.1 }
+        }
+    };
+
+    const linkVariants = {
+        closed: { opacity: 0, y: 10 },
+        open: { opacity: 1, y: 0 }
+    };
+
     return (
         <>
-            {/* Bouton burger - Amélioré avec condition de couleur selon le scroll */}
-            <button
-                onClick={toggleMenu}
-                className="fixed top-6 right-6 z-[60] lg:hidden bg-dark p-3 rounded-full shadow-lg"
+            <motion.header
+                initial={{ y: -100 }}
+                animate={{ y: 0 }}
+                className={`fixed top-0 inset-x-0 z-[70] transition-all duration-500 border-b border-dark/5
+                ${scrolled 
+                    ? "bg-[#FDF8E6]/90 backdrop-blur-md py-2 shadow-sm" 
+                    : "bg-[#FDF8E6]/95 py-4" 
+                }`}
             >
-                <div className="relative flex flex-col justify-between w-6 h-4">
-                    <span className={`bg-beige h-[2px] w-full transition-all duration-300 ${isOpen ? "rotate-45 translate-y-2" : ""}`} />
-                    <span className={`bg-beige h-[2px] w-full transition-all duration-300 ${isOpen ? "opacity-0" : ""}`} />
-                    <span className={`bg-beige h-[2px] w-full transition-all duration-300 ${isOpen ? "-rotate-45 -translate-y-2" : ""}`} />
-                </div>
-            </button>
-
-            {/* Header Sticky */}
-            <header
-                className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 
-                ${scrolled ? "bg-beige/80 backdrop-blur-md py-2 shadow-sm" : "bg-transparent py-6"}
-                ${isOpen ? "h-screen bg-beige opacity-100" : "h-auto"} 
-                lg:h-auto lg:opacity-100`}
-            >
-                <nav className="max-w-[1400px] mx-auto px-6 flex flex-col lg:flex-row justify-between items-center w-full h-full">
+                <nav className="max-w-[1400px] mx-auto px-8 flex justify-between items-center">
                     
-                    {/* Logo */}
-                    <div className="flex items-center justify-between w-full lg:w-auto">
-                        <a href="#accueil" onClick={closeMenu}>
-                            <img src="/logo.svg" alt="Logo" className={`transition-all duration-300 ${scrolled ? "max-w-[60px]" : "max-w-[80px]"}`} />
-                        </a>
-                    </div>
+                    <Link href="/#accueil" onClick={closeMenu} className="relative">
+                        <motion.img 
+                            src="/logo.svg" 
+                            alt="Logo" 
+                            className="transition-all duration-300"
+                            style={{ maxWidth: scrolled ? "55px" : "70px" }}
+                            whileHover={{ scale: 1.03 }}
+                        />
+                    </Link>
 
-                    {/* Menu Links */}
-                    <ul className={`
-                        flex flex-col lg:flex-row items-center gap-8 lg:gap-10 font-sans text-dark uppercase tracking-widest text-sm
-                        transition-all duration-500
-                        ${isOpen ? "mt-20 opacity-100" : "hidden lg:flex opacity-100"}
-                    `}>
-                        <li className={liStyle}><a href="#accueil" onClick={closeMenu}>Accueil</a></li>
-                        <li className={liStyle}><a href="#bio" onClick={closeMenu}>Qui suis-je</a></li>
-                        <li className={liStyle}><a href="#publications" onClick={closeMenu}>Parutions</a></li>
-                        <li className={liStyle}><a href="#galerie" onClick={closeMenu}>Galerie</a></li>
-                        <li className={liStyle}><a href="#contact" onClick={closeMenu}>Contact</a></li>
-                        <li className={liStyle}><Link href="/parutions" onClick={closeMenu}>Parutions</Link></li>
-                        
-                        {/* Barre de soulignement animée en desktop */}
-                        <span className="hidden lg:block absolute bottom-0 left-0 w-0 h-[1px] bg-dark transition-all duration-300 group-hover:w-full"></span>
+                    {/* Desktop Menu */}
+                    <ul className="hidden lg:flex items-center gap-10">
+                        {["Accueil", "Bio", "Ateliers", "Parutions", "Galerie", "News", "Contact"].map((item) => (
+                            <li key={item} className={liStyle}>
+                                <Link href={`/#${item.toLowerCase()}`}>{item}</Link>
+                                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-primary transition-all duration-300 group-hover:w-full"></span>
+                            </li>
+                        ))}
                     </ul>
+
+                    {/* Burger Button */}
+                    <button
+                        onClick={toggleMenu}
+                        className="lg:hidden w-10 h-10 flex flex-col justify-center items-center gap-1.5 focus:outline-none"
+                        aria-label="Menu"
+                    >
+                        <motion.span 
+                            animate={isOpen ? { rotate: 45, y: 7.5 } : { rotate: 0, y: 0 }}
+                            className="w-7 h-[1.5px] bg-dark block origin-center"
+                        />
+                        <motion.span 
+                            animate={isOpen ? { opacity: 0, x: 10 } : { opacity: 1, x: 0 }}
+                            className="w-7 h-[1.5px] bg-dark block"
+                        />
+                        <motion.span 
+                            animate={isOpen ? { rotate: -45, y: -7.5 } : { rotate: 0, y: 0 }}
+                            className="w-7 h-[1.5px] bg-dark block origin-center"
+                        />
+                    </button>
                 </nav>
-            </header>
+            </motion.header>
+
+            {/* Mobile Overlay */}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 bg-[#FDF8E6] z-[60] flex items-center justify-center lg:hidden"
+                    >
+                        <motion.ul 
+                            variants={menuVariants}
+                            initial="closed"
+                            animate="open"
+                            className="flex flex-col items-center gap-6 text-center"
+                        >
+                            {["Accueil", "Bio", "Ateliers", "Parutions", "Galerie", "News", "Contact"].map((item) => (
+                                <motion.li 
+                                    key={item} 
+                                    variants={linkVariants}
+                                    className="text-xl font-serif italic text-dark hover:text-primary transition-colors"
+                                >
+                                    <Link href={`/#${item.toLowerCase()}`} onClick={closeMenu}>
+                                        {item}
+                                    </Link>
+                                </motion.li>
+                            ))}
+                        </motion.ul>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </>
     );
 }
