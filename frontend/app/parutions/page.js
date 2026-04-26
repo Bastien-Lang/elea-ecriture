@@ -36,15 +36,22 @@ export default function PublicationsPage() {
         <main className="min-h-screen bg-beige pt-32 pb-20 px-6">
             <div className="max-w-[1100px] mx-auto">
                 
-                <Link href="/#news" className="text-dark/50 hover:text-dark transition-colors text-sm uppercase tracking-widest mb-10 inline-block">
-                    ← Retour aux actualités
+                <Link href="/#parutions" className="text-dark/50 hover:text-dark transition-colors text-sm uppercase tracking-widest mb-10 inline-block">
+                    ← Retour aux parutions
                 </Link>
 
                 <div className="mb-16">
                     <Title>Mes Parutions</Title>
                     <p className="mt-4 text-dark/70 font-light max-w-2xl">
-                        Découvrez mes derniers ouvrages, romans et collaborations éditoriales. 
-                        Chaque projet est une nouvelle aventure littéraire.
+                        Écrire...<br/>
+                        Ce n'est pas seulement une envie,<br/>
+                        Le plaisir de laisser jaillir les mots,<br/>
+                        Chercher ceux qui traduiront le mieux la justesse de la pensée, des émotions,<br/>
+                        C'est un appel,<br/>
+                        L'impossibilité de vivre autrement,<br/>
+                        Une respiration,<br/>
+                        Un espace qui s'ouvre sur l'horizon.<br/>
+                        Écrire un bout du monde...<br/>
                     </p>
                 </div>
 
@@ -77,6 +84,12 @@ export default function PublicationsPage() {
                                     {pub.description.split('\n').map((paragraph, i) => (
                                         <p key={i} className="mb-4">{paragraph}</p>
                                     ))}
+                                </div>
+                                <div>
+                                    Commandez-le sur 
+                                    <a href="https://librairie.bod.fr/des-eclats-de-nuit-plein-le-coeur-emanuelle-lang-9782322156009" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                                        Librairie BOD
+                                    </a>
                                 </div>
                             </div>
                         </article>

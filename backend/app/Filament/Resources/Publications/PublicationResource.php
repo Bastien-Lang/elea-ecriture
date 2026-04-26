@@ -17,6 +17,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\DatePicker;
 
+
 class PublicationResource extends Resource
 {
     protected static ?string $model = Publication::class;
@@ -59,6 +60,7 @@ class PublicationResource extends Resource
                 \Filament\Tables\Columns\TextColumn::make('title'),
                 \Filament\Tables\Columns\TextColumn::make('published_at')->date(),
             ]);
+                
     }
 
     public static function getPages(): array

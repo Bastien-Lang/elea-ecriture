@@ -7,7 +7,7 @@ export default function SalonsPage() {
     return (
         <main className="min-h-screen bg-beige pt-24 md:pt-32 pb-20 px-6">
             <div className="max-w-[1400px] mx-auto">
-                <Link href="/" className="text-dark/50 hover:text-primary transition-colors text-[12px] uppercase tracking-[0.2em] mb-12 inline-block font-medium">← Retour à l'accueil</Link>
+                <Link href="/#news" className="text-dark/50 hover:text-primary transition-colors text-[12px] uppercase tracking-[0.2em] mb-12 inline-block font-medium">← Retour aux actualités</Link>
                 
                 <motion.header 
                     className="mb-20 text-center md:text-left"
@@ -30,32 +30,18 @@ export default function SalonsPage() {
                     </motion.div>
 
                     <div className="w-full lg:w-1/2 flex gap-4 h-[500px]">
-                        <motion.div 
+                        <div 
                             className="flex-1 rounded-3xl overflow-hidden shadow-xl"
-                            whileHover={{ flex: 1.5 }}
-                            transition={{ duration: 0.5 }}
                         >
                             <img src="/images/salons.jpg" className="object-cover h-full w-full" alt="Salon" />
-                        </motion.div>
-                        <motion.div 
+                        </div>
+                        <div 
                             className="flex-1 rounded-3xl overflow-hidden shadow-xl"
-                            whileHover={{ flex: 1.5 }}
-                            transition={{ duration: 0.5 }}
                         >
                             <img src="/images/intervention.jpg" className="object-cover h-full w-full" alt="Dédicace" />
-                        </motion.div>
+                        </div>
                     </div>
                 </section>
-
-                <motion.div 
-                    className="mt-32 p-16 bg-light border border-primary/10 rounded-[60px] text-center shadow-sm"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                >
-                    <h4 className="font-serif text-3xl text-dark mb-4 italic">Vous organisez un événement littéraire ?</h4>
-                    <p className="text-dark/60 text-lg mb-8 max-w-xl mx-auto">Je serais ravie d'étudier votre proposition d'invitation pour la saison prochaine.</p>
-                    <Link href="/#contact" className="text-primary font-bold uppercase tracking-[0.3em] text-sm border-b-2 border-primary pb-2 hover:text-dark hover:border-dark transition-all">Me contacter</Link>
-                </motion.div>
             </div>
         </main>
     );

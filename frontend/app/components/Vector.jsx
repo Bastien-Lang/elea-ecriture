@@ -7,10 +7,11 @@ export default function Vector({ position = "bottom" }) {
 
     return (
         <img 
-            className={`absolute right-0 z-0 pointer-events-none ${positionClasses}`} 
+            className={`absolute right-0 z-0 pointer-events-none select-none ${positionClasses}`} 
             src="/vector.svg" 
             alt="" 
             aria-hidden="true"
+            
         />
     );
 }

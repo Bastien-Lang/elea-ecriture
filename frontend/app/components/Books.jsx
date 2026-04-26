@@ -98,10 +98,10 @@ export default function Books() {
 
                     <div className="my-6 space-y-4 text-[1rem] lg:text-[1.125rem] leading-relaxed text-left lg:text-left">
                         <motion.p variants={itemVariants}>
-                            Après des études universitaires littéraires, je me suis orientée dans l’accompagnement des personnes sur les chemins de la conscience et du développement personnel.
-                        </motion.p>
-                        <motion.p variants={itemVariants}>
-                            Auteure de formes littéraires variées – récit, poésie –, j’ai choisi l’auto-édition pour garder une liberté de création. J’illustre moi-même mes livres.
+Engagée très tôt dans l’écriture comme voie d’expression et de transformation, je pose les mots comme on creuse un passage entre l’ombre et la lumière, pour alchimiser les blessures et révéler la beauté du monde. 
+Passionnée par l’humain, j’explore le mystère de l’altérité et la puissance transformatrice de la rencontre, la quête de l’identité, les liens entre les âmes mais aussi les traumatismes, les abus de pouvoir, pour avancer sur le chemin de la connaissance de soi. 
+J’aime mêler parfois le réel à la fiction pour aborder certaines thématiques sous des angles différents, créer des résonances au niveau de l’inconscient à travers des images symboliques tout en étant concrète et authentique. 
+Si ma source d’inspiration est principalement autobiographique, j’apporte une tonalité universelle à mes expériences personnelles pour ouvrir d’autres horizons, et que mon témoignage éclaire d’autres cœurs. J’écris pour semer des graines de lumière autour de moi.                     
                         </motion.p>
                     </div>
 

@@ -17,6 +17,11 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Support\Str;
+use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Actions\Action;
+use Filament\Actions\BulkAction;
+use Illuminate\Database\Eloquent\Collection;
 
 class ThemeResource extends Resource
 {
@@ -44,7 +49,41 @@ class ThemeResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return ThemesTable::configure($table);
+    return $table
+        ->columns([
+            // Affiche le nom du thème
+            TextColumn::make('name')
+                ->label('Nom du Thème')
+                ->sortable()
+                ->searchable(),
+
+            // Affiche le slug (optionnel, mais utile pour vérifier)
+            TextColumn::make('slug')
+                ->label('Slug')
+                ->color('gray')
+                ->fontFamily('mono'),
+
+            // Affiche la date de création pour s'y retrouver
+            TextColumn::make('created_at')
+                ->label('Créé le')
+                ->dateTime('d/m/Y H:i')
+                ->sortable()
+                ->toggleable(isToggledHiddenByDefault: true),
+        ])
+        ->filters([
+            //
+        ])
+        ->actions([
+            Action::make('view')
+                ->label('Voir')
+                ->url(fn (Theme $record) => ThemeResource::getUrl('view', ['record' => $record])),
+            Action::make('edit')
+                ->label('Éditer')
+                ->url(fn (Theme $record) => ThemeResource::getUrl('edit', ['record' => $record])),
+        ])
+        ->bulkActions([
+
+        ]);
     }
 
     public static function getRelations(): array

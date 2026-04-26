@@ -26,14 +26,14 @@ export default function Hero() {
         {/* 3. Le contenu textuel */}
         <div className="relative z-10 text-center px-6">
             {/* Nom : Apparition fluide vers le haut */}
-            <motion.span 
+            <motion.h1
                 className="font-signature text-6xl lg:text-9xl text-light block mb-4"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
             >
                 Emanuelle Lang
-            </motion.span>
+            </motion.h1>
 
             {/* Sous-titre : Apparition juste après le nom */}
             <motion.p 

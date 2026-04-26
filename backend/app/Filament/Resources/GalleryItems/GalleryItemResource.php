@@ -15,6 +15,11 @@ use Filament\Tables\Table;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
+use Filament\Actions\Action;
+use Filament\Actions\BulkAction;
+use Illuminate\Database\Eloquent\Collection;
+
+
 
 class GalleryItemResource extends Resource
 {
@@ -42,7 +47,7 @@ class GalleryItemResource extends Resource
                 ->image()
                 ->directory('gallery')
                 ->required()
-                ->optimize('webp')
+                //->optimize('webp')
                 ->disk('public'),
         ]);
     }
@@ -70,10 +75,10 @@ class GalleryItemResource extends Resource
                 //
             ])
             ->actions([
-               //rajouter les actions pour quick edit et quick delete
+
             ])
             ->bulkActions([
-            //rajouter les actions pour quick edit et quick delete
+                
             ]);
     }
 

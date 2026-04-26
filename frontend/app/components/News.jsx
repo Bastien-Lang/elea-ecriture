@@ -20,8 +20,9 @@ export default function News() {
                 >
                     <Title>Actualités</Title>
                     <div className="space-y-4 mt-6 text-dark/80 text-[1rem] lg:text-[1.125rem] text-left leading-relaxed max-w-lg">
-                        <p>Retrouvez-moi lors des prochains événements littéraires pour échanger sur mes ouvrages et partager un moment de dédicace.</p>
-                        <p>Je propose également des interventions sur-mesure pour les structures qui souhaitent mettre l'accent sur la transmission culturelle.</p>
+                        <p>Retrouvez-moi lors des prochains événements littéraires pour échanger sur mes ouvrages et les faire dédicacer.
+                        J’interviens dans des salons du livre, des bibliothèques, des librairies : rencontres et partage autour de l’écriture et des thématiques présentes dans mes livres, dédicaces, conférences.
+                        </p>
                     </div>
                 </motion.div>
 

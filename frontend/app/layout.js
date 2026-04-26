@@ -1,6 +1,7 @@
 // app/layout.js
 import "./globals.css";
 import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 
 export const metadata = {
   title: "Emanuelle Lang",
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
       <body>
         <Nav></Nav>
         {children}
+        <Footer></Footer>
         </body>
     </html>
   );

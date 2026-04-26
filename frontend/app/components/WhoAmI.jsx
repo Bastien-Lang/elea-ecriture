@@ -44,7 +44,7 @@ export default function WhoAmI() {
                 >
                     <img 
                         src="/images/emanuelle_lang.jpg" 
-                        alt="Emanuelle Lang"
+                        alt="Portrait de Emanuelle Lang"
                         className="w-full h-full object-cover object-[25%_center] scale-110" 
                     />
                 </motion.div>
@@ -61,7 +61,7 @@ export default function WhoAmI() {
                         <Title>Qui suis-je ?</Title>
                     </motion.div>
 
-                    <div className="mt-6 space-y-2 text-[1rem] lg:text-[1.125rem] leading-relaxed text-left lg:text-left">
+                    <div className="mt-6 space-y-4 text-[1rem] lg:text-[1.125rem] leading-relaxed text-left">
                         <motion.p variants={itemVariants}>
                             Après des études universitaires littéraires, je me suis orientée dans l’accompagnement des personnes sur les chemins de la conscience et du développement personnel.
                         </motion.p>
@@ -69,10 +69,13 @@ export default function WhoAmI() {
                             Le domaine artistique a jalonné mon parcours : photo, peinture à l’huile, mandalas. Il enrichit ma créativité et s’allie naturellement à l’écriture.
                         </motion.p>
                         <motion.p variants={itemVariants}>
-                            Auteure de formes littéraires variées – récit, poésie –, j’ai choisi l’auto-édition pour garder une liberté de création. J’illustre moi-même mes livres.
+                            Auteure de formes littéraires variées – récit d’autofiction, poésie –, j’ai choisi l’auto-édition pour garder une liberté de création. J’illustre moi-même mes livres.
                         </motion.p>
                         <motion.p variants={itemVariants}>
                             J’anime des ateliers d’écriture pour transmettre le plaisir d’écrire et accompagner chacun dans la découverte de sa créativité. 
+                        </motion.p>
+                        <motion.p variants={itemVariants}>
+                            J’anime également des ateliers de méditation guidée et de pleine conscience pour partager mon expérience et avancer ensemble sur le chemin de la Présence à soi et au monde. 
                         </motion.p>
                     </div>
                 </motion.div>

@@ -36,16 +36,12 @@ export default function Workshop() {
                     <Title>Ateliers</Title>
                     <div className="space-y-4 mt-6 text-dark/80 text-[1rem] lg:text-[1.125rem] text-left leading-relaxed max-w-lg">
                         <p>
-                            Après des études universitaires littéraires, je me suis orientée dans l’accompagnement des personnes sur les chemins de la conscience et du développement personnel.
-                        </p>
+                            « En chemin vers Soi, dans le partage avec les autres. » </p>
                         <p>
-                            Le domaine artistique a jalonné mon parcours : photo, peinture à l’huile, mandalas. Il enrichit ma créativité et s’allie naturellement à l’écriture.
-                        </p>
-                        <p>
-                            Auteure de formes littéraires variées – récit, poésie –, j’ai choisi l’auto-édition pour garder une liberté de création. J’illustre moi-même mes livres.
-                        </p>
-                        <p>
-                            J’anime des ateliers d’écriture pour transmettre le plaisir d’écrire et accompagner chacun dans la découverte de sa créativité. 
+                            Je propose des ateliers d’écriture et des ateliers de méditation, pour vous accompagner dans des espaces de découverte de soi et d’évolution personnelle.
+                            Les deux ateliers sont indépendants l’un de l’autre.
+                            Ils offrent des chemins différents et complémentaires : celui du ressenti et de l’intériorité à travers la méditation, celui de l’expression et de la créativité à travers l’écriture.
+
                         </p>
                     </div>
                 </motion.div>
